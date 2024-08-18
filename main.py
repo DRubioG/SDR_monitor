@@ -11,21 +11,18 @@ class MainWindow(uiclass, baseclass):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.plot(
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],  # Hours
-            [30, 32, 34, 32, 33, 31, 29, 32, 35, 45],  # Temperature
-        )
+        
         self.time = list(range(10000))
         self.temperature = [randint(0, 100) for _ in self.time]
         self.tim = QtCore.QTimer()
         self.tim.setInterval(1000)
-        styles = {"color": "red", "font-size": "18px"}
+        
         self.graphWidget_constellation.setLabel("bottom", "Q")
         self.graphWidget_constellation.setLabel("left", "I")
         self.graphWidget_constellation.addLegend()
         self.graphWidget_constellation.showGrid(x=True, y=True)
-        self.graphWidget_constellation.setXRange(0, 1)
-        self.graphWidget_constellation.setYRange(0, 1)
+        self.graphWidget_constellation.setXRange(0, 1, padding=0.5)
+        self.graphWidget_constellation.setYRange(0, 1, padding=0.5)
         self.tim.timeout.connect(self.update_plot2)
         self.tim.start()
         self.timer = QtCore.QTimer()
